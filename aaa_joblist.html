@@ -1,0 +1,93 @@
+<?php 
+if(stristr($_SERVER['PHP_SELF'],basename(__FILE__))){
+die("アクセスできません");
+}
+
+setlocale(LC_ALL, 'ja_JP.UTF-8');
+setlocale(LC_ALL, 'ja_JP.EUC-JP');
+setlocale(LC_ALL, 'ja_JP.Shift_JIS');
+
+$url_joblist = "p_joblist.php";
+//$url_regist = "p_regist.php";
+
+
+$row = 0;
+if (($handle = fopen("update/joblist.csv", "r")) !== FALSE) {
+while (($array = fgetcsv($handle, 1000, ",")) !== FALSE) {
+mb_convert_variables("UTF-8", "SJIS-win", $array);
+	for ($i=0; $i < count($array); $i++) {
+		$array[$i] = preg_replace("/\n/","<br />",$array[$i]);
+		$newarray[$row][$i] = $array[$i];
+	}
+
+$newarray[$row] = array(
+"ID" => $array[0],
+"TITLE" => $array[1],
+"HEAD1" => $array[2],
+"BODY1" => $array[3],
+"HEAD2" => $array[4],
+"BODY2" => $array[5],
+"TOP" => $array[6],
+"OPTION" => $array[7]
+);
+
+$row++;
+}
+fclose($handle);
+}
+
+
+if($toppage == 1){
+
+//TOP HTML出力
+for ($j=1; $j < count($newarray); $j++) {
+if($newarray[$j]["TITLE"] && $newarray[$j]["ID"] && $newarray[$j]["TOP"] == "yes"){
+print <<<EOM
+<li class="{$newarray[$j]["OPTION"]}"><a href="{$url_joblist}#No{$newarray[$j]["ID"]}">{$newarray[$j]["TITLE"]}</a></li>
+EOM;
+}
+}
+
+}else{
+
+//HTML出力
+for ($j=1; $j < count($newarray); $j++) {
+if($newarray[$j]["TITLE"] && $newarray[$j]["ID"]){
+
+$joburl_value = '(No.' . $newarray[$j]["ID"] . ')' .  $newarray[$j]["TITLE"];
+$joburl_value = rawurlencode($joburl_value);
+
+print <<<EOM
+<a name="No{$newarray[$j]["ID"]}"></a>
+<div class="box-job">
+<h3 class="{$newarray[$j]["OPTION"]}"><a href="{$fm_candidates_inquiry}?jobtitle={$joburl_value}"><em>(No.{$newarray[$j]["ID"]})</em>{$newarray[$j]["TITLE"]}</a></h3>
+<table>
+EOM;
+
+if($newarray[$j]["HEAD1"] && $newarray[$j]["BODY1"]){
+print <<<EOM
+<tr>
+<td class="c1"><strong>{$newarray[$j]["HEAD1"]}</strong></td>
+<td class="c2">{$newarray[$j]["BODY1"]}</td>
+</tr>
+EOM;
+}
+if($newarray[$j]["HEAD2"] && $newarray[$j]["BODY2"]){
+print <<<EOM
+<tr>
+<td class="c1"><strong>{$newarray[$j]["HEAD2"]}</strong></td>
+<td class="c2">{$newarray[$j]["BODY2"]}
+</td>
+</tr>
+EOM;
+}
+print <<<EOM
+</table>
+</div>
+EOM;
+}
+}
+
+}
+
+?>

@@ -1,0 +1,21 @@
+#Redirect permanent /script/formcgi/formcgi.php http://www.oaks.co.jp/index.php
+ErrorDocument 404 http://www.oaks.co.jp/404.htm
+
+Redirect permanent /index.html http://www.oaks.co.jp/index.php
+Redirect permanent /index.htm http://www.oaks.co.jp/index.php
+Redirect permanent /english/eaboutus.html http://www.oaks.co.jp/eng/eng_p_corporation.php
+Redirect permanent /english/linke.html http://www.oaks.co.jp/eng/eng_p_corporation.php
+Redirect permanent /english/faq2e.html http://www.oaks.co.jp/eng/eng_p_company_faq.php
+Redirect permanent /english/searche.html http://www.oaks.co.jp/eng/eng_p_company.php
+Redirect permanent /link.html http://www.oaks.co.jp/p_corporation.php
+Redirect permanent /aboutus.html http://www.oaks.co.jp/p_corporation.php
+Redirect permanent /privacy.html http://www.oaks.co.jp/p_corporation_policy.php
+Redirect permanent /employers/faq2.html http://www.oaks.co.jp/p_company_faq.php
+Redirect permanent /employers/search.html http://www.oaks.co.jp/p_company.php
+Redirect permanent /employers/specialty2.html http://www.oaks.co.jp/p_company_strength.php
+Redirect permanent /applicants/faq1.html http://www.oaks.co.jp/p_candidates_faq.php
+Redirect permanent /applicants/opportunities.html http://www.oaks.co.jp/p_joblist.php
+Redirect permanent /applicants/introprocess.html http://www.oaks.co.jp/p_candidates.php
+Redirect permanent /applicants/specialty1.html http://www.oaks.co.jp/p_candidates_strength.php
+Redirect permanent /careers.html http://www.oaks.co.jp/p_corporation_recruit.php
+Redirect permanent /070313.htm https://ssl.alpha-prm.jp/oaks.co.jp/f_candidates_inquiry.php
